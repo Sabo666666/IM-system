@@ -14,17 +14,18 @@ public class IMServer {
     }
 
     public void startServer(int port) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(port);
-        System.out.println("Server started on port " + port);
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server started on port " + port);
 
-        while (true) {
-            Socket clientSocket = serverSocket.accept();
-            try {
-                handleClient(clientSocket);
-            } catch (IOException e) {
-                System.out.println("Connection error: " + e.getMessage());
-            } finally {
-                clientSocket.close();
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                try {
+                    handleClient(clientSocket);
+                } catch (IOException e) {
+                    System.out.println("Connection error: " + e.getMessage());
+                } finally {
+                    clientSocket.close();
+                }
             }
         }
     }
