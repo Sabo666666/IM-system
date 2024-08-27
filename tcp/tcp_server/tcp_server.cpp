@@ -5,7 +5,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
 
     QTcpServer server;
-    if (!bindSocket(&server, "127.0.0.1", 1234)) {
+    if (!bindSocket(&server, "127.0.0.1", 8080)) {
         qDebug() << "绑定失败";
         return -1;
     }
